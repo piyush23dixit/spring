@@ -23,6 +23,6 @@ public class PracticeSpringApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        paymentServices.send();
+//        paymentServices.send();
     }
 }
