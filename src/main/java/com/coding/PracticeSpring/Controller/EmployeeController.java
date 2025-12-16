@@ -1,6 +1,8 @@
 package com.coding.PracticeSpring.Controller;
 
 import com.coding.PracticeSpring.DTO.EmployeeDto;
+import com.coding.PracticeSpring.ENTITY.EmployeeEntity;
+import com.coding.PracticeSpring.REPO.EmployeeRepo;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
@@ -9,10 +11,15 @@ import java.time.LocalDate;
 @RequestMapping("/emp")
 public class EmployeeController {
 
+    private final EmployeeRepo employeeRepo;
+
+    public EmployeeController(EmployeeRepo employeeRepo) {
+        this.employeeRepo = employeeRepo;
+    }
+
     @GetMapping("/{id}")
-    public EmployeeDto getEmpById(@PathVariable Long id) {
-        return new EmployeeDto(id, "Piyush","dixitpiyush23@gmil.com",26, LocalDate.of(2025,1,1),
-                true);
+    public EmployeeEntity getEmpById(@PathVariable Long id) {
+        return employeeRepo.findById(id).orElse(null);
     }
 
     @GetMapping
@@ -20,4 +27,5 @@ public class EmployeeController {
                              @RequestParam Integer age) {
         return "hi my name is "+name +" and age is "+age;
         }
+
 }
