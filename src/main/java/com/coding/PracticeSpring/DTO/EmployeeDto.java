@@ -1,74 +1,44 @@
 package com.coding.PracticeSpring.DTO;
 
+import com.coding.PracticeSpring.Annotation.EmployeeRoleValidation;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.validation.constraints.*;
+import lombok.*;
+
 import java.time.LocalDate;
 
+@Getter
+@Setter
+@ToString
+@NoArgsConstructor
+@AllArgsConstructor
 public class EmployeeDto {
 
     private  Long id;
+
+    @NotBlank(message="Name cannot be blank or null")
+    @Size(min=1,max=10, message ="Name should be between 1 to 10")
     private  String name;
+
+    @NotBlank(message="Email cannot be blank or null")
+    @Email(message="Enter Valid email")
     private  String email;
+
+    @Max(value=50, message ="Age should not be greater than 50")
     private  Integer age;
+
+    @NotBlank(message="Role cannot be blank or null")
+//@Pattern(regexp = "^(ADMIN|USER)$",message = "Employee can be Admin or User")
+    @EmployeeRoleValidation
+    private String role;
+
+
     private LocalDate dateOfJoining;
+
+    @JsonProperty("isActive")
     private Boolean isActive;
 
-    public EmployeeDto() {}
 
-    public EmployeeDto(Long id, String name, String email, Integer age, LocalDate dateOfJoining, Boolean isActive) {
-        this.id = id;
-        this.name = name;
-        this.email = email;
-        this.age = age;
-        this.dateOfJoining = dateOfJoining;
-        this.isActive = isActive;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public Integer getAge() {
-        return age;
-    }
-
-    public void setAge(Integer age) {
-        this.age = age;
-    }
-
-    public LocalDate getDateOfJoining() {
-        return dateOfJoining;
-    }
-
-    public void setDateOfJoining(LocalDate dateOfJoining) {
-        this.dateOfJoining = dateOfJoining;
-    }
-
-    public Boolean getActive() {
-        return isActive;
-    }
-
-    public void setActive(Boolean active) {
-        isActive = active;
-    }
 }
 
 
