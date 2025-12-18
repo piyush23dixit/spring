@@ -4,6 +4,7 @@ import com.coding.PracticeSpring.DTO.EmployeeDto;
 import com.coding.PracticeSpring.ENTITY.EmployeeEntity;
 import com.coding.PracticeSpring.REPO.EmployeeRepo;
 import com.coding.PracticeSpring.SERVICE.EmployeeService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
@@ -28,8 +29,9 @@ public class EmployeeController {
 
 
     @GetMapping("/{id}")
-    public EmployeeDto getEmpById(@PathVariable Long id) {
-        return employeeService.getEmpById(id);
+    public ResponseEntity<EmployeeDto> getEmpById(@PathVariable Long id) {
+         EmployeeDto employeeDto = employeeService.getEmpById(id);
+        return ResponseEntity.ok(employeeDto);
     }
 
     @GetMapping
